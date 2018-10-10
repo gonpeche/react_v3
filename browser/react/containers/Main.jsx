@@ -8,6 +8,7 @@ import SingleAlbum from '../components/SingleAlbum';
 import audio from '../audio';
 import Artists from '../components/Artists';
 import Artist from '../components/Artist';
+import FilterableArtistsContainer from './FilterableArtistsContainer';
 
 export default class Main extends React.Component {
   constructor(){
@@ -139,7 +140,7 @@ export default class Main extends React.Component {
                 />
               )} 
             />
-            <Route path="/artists" exact render={() => <Artists artists={artists} />} />
+            <Route path="/artists" exact render={() => <FilterableArtistsContainer artists={artists} />} />
             <Route path="/artists/:id" render={({ match }) => 
               <Artist
                 artistId={match.params.id}
