@@ -18,6 +18,7 @@ class FilterableArtistsContainer extends React.Component {
         });
     }
 
+
     render() {
         const inputValue = this.state.inputValue
         const filteredArtists = this.props.artists.filter(artist =>
@@ -26,7 +27,6 @@ class FilterableArtistsContainer extends React.Component {
         return (
             <div>
                 <FilterInput handleChange={this.handleChange} />
-             {console.log(filteredArtists)} 
                 <Artists artists={filteredArtists} />
             </div>
         )

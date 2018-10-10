@@ -22,14 +22,13 @@ export default () => (
         <section>
           <h4 className="text-muted">PLAYLISTS</h4>
           <h4>
-            <Link className="btn btn-primary btn-block" to='/NewPlayList'>
+            <Link className="btn btn-primary btn-block" to='/newplaylist'>
               <span className="glyphicon glyphicon-plus"></span> PLAYLIST
             </Link>
           </h4>
         </section>
 
       </sidebar>
-      <Route exact path="/" render={() => <Albums albums={albums} /> } />
 
     </div>
 );

@@ -10,6 +10,7 @@ import Artists from '../components/Artists';
 import Artist from '../components/Artist';
 import FilterableArtistsContainer from './FilterableArtistsContainer';
 import NewPlayList from '../components/NewPlayList';
+import NewPlaylistContainer from './NewPlaylistContainer';
 
 export default class Main extends React.Component {
   constructor(){
@@ -122,10 +123,6 @@ export default class Main extends React.Component {
     this.loadSong(song.audioUrl)
   }
 
-  // collectorValue (arg) {
-  //   let 
-  // } 
-
   render() {
     const  { albums, selectedAlbum, selectedSong, isPlaying, progress, artists, selectedArtist } = this.state;
     return (
@@ -147,7 +144,7 @@ export default class Main extends React.Component {
               )}
             />
             
-            <Route exact path="/NewPlayList" render={() => <NewPlayList NewPlayList={NewPlayList} /> } />
+            <Route exact path="/newplaylist" render={() => <NewPlaylistContainer /> } />
 
             <Route path="/artists" exact render={() => <FilterableArtistsContainer artists={artists} />} />
             <Route path="/artists/:id" render={({ match }) => 
