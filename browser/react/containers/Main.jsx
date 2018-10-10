@@ -9,6 +9,7 @@ import audio from '../audio';
 import Artists from '../components/Artists';
 import Artist from '../components/Artist';
 import FilterableArtistsContainer from './FilterableArtistsContainer';
+import NewPlayList from '../components/NewPlayList';
 
 export default class Main extends React.Component {
   constructor(){
@@ -25,6 +26,7 @@ export default class Main extends React.Component {
         albums: [],
         songs: []
       },
+      NewPlayList: [],
     };
     this.selectAlbum = this.selectAlbum.bind(this);
     this.start = this.start.bind(this);
@@ -120,6 +122,10 @@ export default class Main extends React.Component {
     this.loadSong(song.audioUrl)
   }
 
+  // collectorValue (arg) {
+  //   let 
+  // } 
+
   render() {
     const  { albums, selectedAlbum, selectedSong, isPlaying, progress, artists, selectedArtist } = this.state;
     return (
@@ -138,8 +144,11 @@ export default class Main extends React.Component {
                   album={selectedAlbum} 
                   albumId={match.params.id} 
                 />
-              )} 
+              )}
             />
+            
+            <Route exact path="/NewPlayList" render={() => <NewPlayList NewPlayList={NewPlayList} /> } />
+
             <Route path="/artists" exact render={() => <FilterableArtistsContainer artists={artists} />} />
             <Route path="/artists/:id" render={({ match }) => 
               <Artist
@@ -151,6 +160,7 @@ export default class Main extends React.Component {
                 selectedSong={selectedSong}
                 selectArtist={this.selectArtist} />}
               />
+            
             <Redirect from="/" to="/albums" />
           </Switch>
         </div>
