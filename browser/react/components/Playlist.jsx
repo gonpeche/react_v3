@@ -2,32 +2,25 @@ import React from 'react';
 import Songs from './Songs'
 
 class Playlist extends React.Component {
-    constructor(props){
-        super(props)
-    }
-    
-
     componentDidMount() {
         this.props.selectPlaylist(this.props.playlistId)
     }
+    componentWillReceiveProps (nextProps) {
+        if (nextProps.playlistId !== this.props.playlistId) {
+            this.props.selectPlaylist(nextProps.playlistId)
+        }
+    }
     render () {
-        console.log('playlists:',this.props.playlist)
+        const { playlist } = this.props;
         return (
             <div>
-            <h3>playlist.name</h3>
-            <Songs  /> {/** Hooray for reusability! */}
-            <hr />
+                <h3>{ playlist.name }</h3>
+                <Songs songs={playlist.songs} /> {/** Hooray for reusability! */}
+                { playlist.songs && !playlist.songs.length && <small>No songs.</small> }
+                <hr />
             </div>
         )
     }
 }
 
-{
-    // <div>
-        // <h3>{ playlist.name }</h3>
-        // <Songs songs={playlist.songs} /> {/** Hooray for reusability! */}
-        // { playlist.songs && !playlist.songs.length && <small>No songs.</small> }
-        // <hr />
-    // </div>
-}
 export default Playlist;

@@ -104,17 +104,11 @@ export default class Main extends React.Component {
   selectPlaylist(playlistId) {
     // console.log('playlistId:',playlistId)
     axios.get(`/api/playlists/${playlistId}`)
-    // .then(res => {
-    //   console.log('respuesta ',res.data)
-    //   res.data
-    // })
+    .then(res => res.data)
     .then(playlist => 
       this.setState({
       selectedPlaylist: playlist
     }))
-    .then(console.log('aca: ',this.state.selectedPlaylist))
-    .catch(e => console.log(e))
-    // console.log(this.state.selectedPlaylist)
   }
 
   start(song, songs) {
@@ -185,12 +179,12 @@ export default class Main extends React.Component {
               )}
             />
             
-            <Route exact path="/newplaylist" render={() => <NewPlaylistContainer addPlaylist={this.addPlaylist} /> } />
-            <Route exact path="/playlist/:id" render={ ({ match }) =>
+            <Route path="/newplaylist/new" render={() => <NewPlaylistContainer addPlaylist={this.addPlaylist} /> } />
+            <Route path="/playlist/:id" render={ ({ match }) =>
               <Playlist  
                 playlistId={match.params.id}
+                playlist={this.state.selectedPlaylist}
                 selectPlaylist={this.selectPlaylist}
-                playlist={this.selectedPlaylist}
               />}
             />
 
