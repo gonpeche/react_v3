@@ -1,25 +1,31 @@
 import React from 'react';
+import Songs from './Songs'
 
 class Playlist extends React.Component {
-    // constructor(props){
-    //     super(props)
-    // }
+    constructor(props){
+        super(props)
+    }
     
 
     componentDidMount() {
-        console.log(this.props.playlistId)
         this.props.selectPlaylist(this.props.playlistId)
     }
     render () {
+        console.log('playlists:',this.props)
         return (
             <div>
-            {
-                // <h3>{ playlist.name } HOLA </h3>
-                // <Songs songs={playlist.songs} /> {/** Hooray for reusability! */}
-                // { playlist.songs && !playlist.songs.length && <small>No songs.</small> }
-                // <hr />
+            <h1>HOLA</h1>
+            
+         {
+            //  <h3>{ playlist.name } HOLA </h3>
+            //  <Songs songs={playlist.name} /> {/** Hooray for reusability! */}
+            //  { playlist.songs && !playlist.songs.length && <small>No songs.</small> }
+            //  <hr />
 
-            }
+         }
+
+
+            
             </div>
         )
     }

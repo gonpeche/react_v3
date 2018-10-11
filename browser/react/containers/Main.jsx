@@ -30,7 +30,9 @@ export default class Main extends React.Component {
       },
       NewPlayList: [],
       playlist: [],
-      selectedPlaylist: {}
+      selectedPlaylist: {
+        id: []
+      }
     };
     this.selectAlbum = this.selectAlbum.bind(this);
     this.start = this.start.bind(this);
@@ -40,6 +42,7 @@ export default class Main extends React.Component {
     this.previous = this.previous.bind(this);
     this.selectArtist = this.selectArtist.bind(this);
     this.addPlaylist = this.addPlaylist.bind(this);
+    this.selectPlaylist = this.selectPlaylist.bind(this)
   }
   
   componentDidMount() {
@@ -101,11 +104,19 @@ export default class Main extends React.Component {
   }
 
   selectPlaylist(playlistId) {
+    console.log('playlistId:',playlistId)
     axios.get(`/api/playlists/${playlistId}`)
-    .then(res => res.data)
-    .then(playlist => this.setState({
-      selectedArtist: playlist
+    .then(res => {
+      console.log(res.data)
+      res.data
+    })
+    .then(playlist => 
+      this.setState({
+      selectedPlaylist: {
+        id: playlist
+      }
     }))
+    .catch(e => console.log(e))
   }
 
   start(song, songs) {
@@ -177,10 +188,11 @@ export default class Main extends React.Component {
             />
             
             <Route exact path="/newplaylist" render={() => <NewPlaylistContainer addPlaylist={this.addPlaylist} /> } />
-            <Route exact path="/playlist/:playlistId" render={ ({ match }) =>
+            <Route exact path="/playlist/:id" render={ ({ match }) =>
               <Playlist  
                 playlistId={match.params.id}
                 selectPlaylist={this.selectPlaylist}
+                playlist={this.selectedPlaylist}
               />}
             />
 
