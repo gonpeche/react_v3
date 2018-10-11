@@ -67,7 +67,6 @@ export default class Main extends React.Component {
     .then(playlist => this.setState({
       playlist: playlist
     }))
-    .then(res => console.log(this.state.playlist))
     .catch(e => console.log(e))
 
   }
@@ -178,9 +177,10 @@ export default class Main extends React.Component {
             />
             
             <Route exact path="/newplaylist" render={() => <NewPlaylistContainer addPlaylist={this.addPlaylist} /> } />
-            <Route exact path="/playlist/:playlistId" render={ ({match}) =>
+            <Route exact path="/playlist/:playlistId" render={ ({ match }) =>
               <Playlist  
                 playlistId={match.params.id}
+                selectPlaylist={this.selectPlaylist}
               />}
             />
 

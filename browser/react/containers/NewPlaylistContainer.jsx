@@ -38,7 +38,7 @@ class NewPlaylistContainer extends React.Component {
 
    handleSubmit(submit) {
         submit.preventDefault();
-        console.log(this.state.input)
+        // console.log(this.state.input)
         this.props.addPlaylist(this.state.input)
         
         this.setState({

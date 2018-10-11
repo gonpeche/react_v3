@@ -1,18 +1,25 @@
-import { React, Component } from 'react';
+import React from 'react';
 
-class Playlist extends Component {
-    constructor(props){
-        super(props)
+class Playlist extends React.Component {
+    // constructor(props){
+    //     super(props)
+    // }
+    
+
+    componentDidMount() {
+        console.log(this.props.playlistId)
+        this.props.selectPlaylist(this.props.playlistId)
     }
-
     render () {
-        const { selectedPlaylist } = this.state
         return (
             <div>
-                <h3>{ playlist.name }</h3>
-                <Songs songs={playlist.songs} /> {/** Hooray for reusability! */}
-                { playlist.songs && !playlist.songs.length && <small>No songs.</small> }
-                <hr />
+            {
+                // <h3>{ playlist.name } HOLA </h3>
+                // <Songs songs={playlist.songs} /> {/** Hooray for reusability! */}
+                // { playlist.songs && !playlist.songs.length && <small>No songs.</small> }
+                // <hr />
+
+            }
             </div>
         )
     }

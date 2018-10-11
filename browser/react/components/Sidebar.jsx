@@ -34,7 +34,7 @@ export default (props) => (
           {
               props.playlist.map( playlist => 
               <li key={playlist.id} className="playlist-item menu-item">
-                <Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
+                <Link to={`/playlist/${playlist.id}`}>{playlist.name}</Link>
               </li>
               ) 
           }
