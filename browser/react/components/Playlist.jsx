@@ -11,24 +11,23 @@ class Playlist extends React.Component {
         this.props.selectPlaylist(this.props.playlistId)
     }
     render () {
-        console.log('playlists:',this.props)
+        console.log('playlists:',this.props.playlist)
         return (
             <div>
-            <h1>HOLA</h1>
-            
-         {
-            //  <h3>{ playlist.name } HOLA </h3>
-            //  <Songs songs={playlist.name} /> {/** Hooray for reusability! */}
-            //  { playlist.songs && !playlist.songs.length && <small>No songs.</small> }
-            //  <hr />
-
-         }
-
-
-            
+            <h3>playlist.name</h3>
+            <Songs  /> {/** Hooray for reusability! */}
+            <hr />
             </div>
         )
     }
 }
 
+{
+    // <div>
+        // <h3>{ playlist.name }</h3>
+        // <Songs songs={playlist.songs} /> {/** Hooray for reusability! */}
+        // { playlist.songs && !playlist.songs.length && <small>No songs.</small> }
+        // <hr />
+    // </div>
+}
 export default Playlist;

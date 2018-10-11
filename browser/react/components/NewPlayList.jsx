@@ -19,7 +19,7 @@ const NewPlayList = (props) => {
 
                     {props.mensaje ? <div className="alert alert-warning">{props.mensaje}</div> : null}
 
-                    { props.valid ?
+                    { props.valid ? // 
                     <button type="submit" className="btn btn-success">Create Playlist</button>
                     :
                     <button type="submit" className="btn btn-success" disabled>Create Playlist</button>

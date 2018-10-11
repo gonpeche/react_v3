@@ -30,9 +30,7 @@ export default class Main extends React.Component {
       },
       NewPlayList: [],
       playlist: [],
-      selectedPlaylist: {
-        id: []
-      }
+      selectedPlaylist: {}
     };
     this.selectAlbum = this.selectAlbum.bind(this);
     this.start = this.start.bind(this);
@@ -104,19 +102,19 @@ export default class Main extends React.Component {
   }
 
   selectPlaylist(playlistId) {
-    console.log('playlistId:',playlistId)
+    // console.log('playlistId:',playlistId)
     axios.get(`/api/playlists/${playlistId}`)
-    .then(res => {
-      console.log(res.data)
-      res.data
-    })
+    // .then(res => {
+    //   console.log('respuesta ',res.data)
+    //   res.data
+    // })
     .then(playlist => 
       this.setState({
-      selectedPlaylist: {
-        id: playlist
-      }
+      selectedPlaylist: playlist
     }))
+    .then(console.log('aca: ',this.state.selectedPlaylist))
     .catch(e => console.log(e))
+    // console.log(this.state.selectedPlaylist)
   }
 
   start(song, songs) {
