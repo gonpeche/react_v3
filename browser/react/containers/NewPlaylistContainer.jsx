@@ -1,5 +1,6 @@
 import React from 'react';
 import NewPlayList from '../components/NewPlayList'
+import axios from 'axios'
 
 class NewPlaylistContainer extends React.Component {
    constructor(props){
@@ -20,12 +21,12 @@ class NewPlaylistContainer extends React.Component {
         if (input.length === 0) {
             this.setState({
               valid: false,
-              message: 'Name is required.'
+              message: 'Nombre es requerido.'
             });
           } else if (input.length > 16) {
             this.setState({
               valid: false,
-              message: 'Name cannot be more than 16 characters long.'
+              message: 'Nombre no puede ser mayor a 16 caracteres.'
             });
           } else {
             this.setState({
@@ -37,16 +38,17 @@ class NewPlaylistContainer extends React.Component {
 
    handleSubmit(submit) {
         submit.preventDefault();
+        console.log(this.state.input)
+        this.props.addPlaylist(this.state.input)
+        
         this.setState({
             input: ''
         });
-
     
-       console.log(this.state.input)
    }
    render() {
        return (
-           <div>
+           <div className="contenedorPlaylist">
            <NewPlayList mensaje={this.state.message} valid={this.state.valid} inputValue={this.state.input} handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
            </div>
        )

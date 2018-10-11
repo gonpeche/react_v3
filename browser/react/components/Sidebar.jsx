@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom'; 
 
-export default () => (
+export default (props) => (
   <div className="col-xs-2">
 
       <sidebar>
@@ -17,8 +17,8 @@ export default () => (
             <Link to="/artists">ARTISTS</Link>
           </h4>
         </section>
-
         <hr />
+
         <section>
           <h4 className="text-muted">PLAYLISTS</h4>
           <h4>
@@ -27,6 +27,22 @@ export default () => (
             </Link>
           </h4>
         </section>
+
+        <hr />
+          <ul className="list-unstyled">
+
+          {
+              props.playlist.map( playlist => 
+              <li key={playlist.id} className="playlist-item menu-item">
+                <Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
+              </li>
+              ) 
+          }
+
+
+            </ul>
+        <hr />
+
 
       </sidebar>
 

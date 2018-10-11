@@ -11,6 +11,7 @@ import Artist from '../components/Artist';
 import FilterableArtistsContainer from './FilterableArtistsContainer';
 import NewPlayList from '../components/NewPlayList';
 import NewPlaylistContainer from './NewPlaylistContainer';
+import Playlist from '../components/Playlist';
 
 export default class Main extends React.Component {
   constructor(){
@@ -28,6 +29,8 @@ export default class Main extends React.Component {
         songs: []
       },
       NewPlayList: [],
+      playlist: [],
+      selectedPlaylist: {}
     };
     this.selectAlbum = this.selectAlbum.bind(this);
     this.start = this.start.bind(this);
@@ -36,9 +39,11 @@ export default class Main extends React.Component {
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
     this.selectArtist = this.selectArtist.bind(this);
+    this.addPlaylist = this.addPlaylist.bind(this);
   }
   
   componentDidMount() {
+
     axios.get('/api/albums')
       .then(res => res.data)
       .then(albums => this.setState({ albums }));
@@ -50,13 +55,31 @@ export default class Main extends React.Component {
     audio.addEventListener('ended', () => {
       this.next();
     });
+
     audio.addEventListener('timeupdate', () => {
       this.setState({
         progress: 100 * audio.currentTime / audio.duration
       });
     });
+
+    axios.get('/api/playlists')
+    .then(res => res.data)
+    .then(playlist => this.setState({
+      playlist: playlist
+    }))
+    .then(res => console.log(this.state.playlist))
+    .catch(e => console.log(e))
+
   }
   
+  addPlaylist(playlistName) {
+    axios.post('/api/playlists', {name: playlistName})
+    .then(res => res.data)
+    .then(playlist => this.setState({
+      playlist: [...this.state.playlist, playlist]
+    }))
+  }
+
   selectAlbum(albumId) {
     axios.get(`/api/albums/${albumId}`)
       .then(res => res.data)
@@ -76,6 +99,14 @@ export default class Main extends React.Component {
             songs,
           }
         }));
+  }
+
+  selectPlaylist(playlistId) {
+    axios.get(`/api/playlists/${playlistId}`)
+    .then(res => res.data)
+    .then(playlist => this.setState({
+      selectedArtist: playlist
+    }))
   }
 
   start(song, songs) {
@@ -124,10 +155,12 @@ export default class Main extends React.Component {
   }
 
   render() {
-    const  { albums, selectedAlbum, selectedSong, isPlaying, progress, artists, selectedArtist } = this.state;
+    const  { albums, selectedAlbum, playlist, addPlaylist ,selectedSong, isPlaying, progress, artists, selectedArtist } = this.state;
     return (
       <div id="main" className="container-fluid">
-        <Sidebar />
+
+        <Sidebar playlist={playlist} />
+
         <div className="col-xs-10">
           <Switch>
             <Route exact path="/albums" render={() => <Albums albums={albums} /> } />
@@ -144,7 +177,12 @@ export default class Main extends React.Component {
               )}
             />
             
-            <Route exact path="/newplaylist" render={() => <NewPlaylistContainer /> } />
+            <Route exact path="/newplaylist" render={() => <NewPlaylistContainer addPlaylist={this.addPlaylist} /> } />
+            <Route exact path="/playlist/:playlistId" render={ ({match}) =>
+              <Playlist  
+                playlistId={match.params.id}
+              />}
+            />
 
             <Route path="/artists" exact render={() => <FilterableArtistsContainer artists={artists} />} />
             <Route path="/artists/:id" render={({ match }) => 
